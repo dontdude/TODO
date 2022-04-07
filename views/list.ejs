@@ -1,16 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Today</title>
-</head>
-<body>
-    <% if(daykind === "Sunday" || daykind === "Saturday"){ %>
-      <h1 style="color:brown">It's <%= daykind %>, Good <%= noonkind %>!</h1>
-    <% } else { %>
-        <h1>It's <%= daykind %>, Good <%= noonkind %>!</h1>
-    <% } %>
-</body>
-</html>
+<%- include("header") -%>
+
+    <div class="box" id="heading">
+        <h1><%= daykind %></h1>
+    </div>
+   
+    <div class="box" id="noon">
+        <h2>Good <%= noonkind %>!</h2>
+    </div>
+
+    <div class="box">
+        <% for(var i = 0; i < listitems.length; i++) { %>
+            <div class="item">
+                <input type="checkbox">
+                <p><%= listitems[i] %><br></p>
+            </div>
+        <% } %>
+
+        <form class="item" action="/" method="post">
+            <input type="text" name="newitem" placeholder="New Task" autocomplete="off">
+            <button type="submit">+</button>
+        </form>
+    </div>
+    <form action="/reset" method="post">
+       <button class="reset">↻</button>
+    </form>
+
+<%- include("footer") -%>
