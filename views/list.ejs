@@ -1,13 +1,10 @@
 <%- include("header") -%>
 
     <div class="box" id="heading">
+        <h2>Good <%= noonkind %>!</h2>
         <h1><%= daykind %></h1>
     </div>
    
-    <div class="box" id="noon">
-        <h2>Good <%= noonkind %>!</h2>
-    </div>
-
     <div class="box">
         <% for(var i = 0; i < listitems.length; i++) { %>
             <div class="item">
