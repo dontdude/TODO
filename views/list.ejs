@@ -1,25 +1,30 @@
 <%- include("header") -%>
+    
+    <form action="/reset" method="post">
+       <input type="hidden" name="resetTasks" value="<%= title %>"></input>
+       <button class="reset">↻</button>
+    </form>
 
     <div class="box" id="heading">
-        <h2>Good <%= noonkind %>!</h2>
-        <h1><%= daykind %></h1>
+        <% if(noon != "custom") { %>
+        <h3>Good <%= noon %>!</h3>
+        <% } %>
+        <h2><%= title %></h2>       
     </div>
    
     <div class="box">
-        <% for(var i = 0; i < listitems.length; i++) { %>
-            <div class="item">
-                <input type="checkbox">
-                <p><%= listitems[i] %><br></p>
-            </div>
-        <% } %>
+        <% tasklist.forEach(function(task){ %>
+            <form class="task" action="/delete" method="post">
+                <input type="checkbox" name="deleteTask" value="<%= task._id %>" onchange="this.form.submit()">    
+                <p><%= task.name %><br></p>
+                <input type="hidden" name="list" value="<%= title %>"></input>
+            </form>
+        <% }); %>
 
-        <form class="item" action="/" method="post">
-            <input type="text" name="newitem" placeholder="New Task" autocomplete="off">
-            <button type="submit">+</button>
+        <form class="task" action="/" method="post">
+            <input type="text" name="newtask" placeholder=" New Task" autocomplete="off">
+            <button type="submit" name="list" value="<%= title %>">+</button>     
         </form>
     </div>
-    <form action="/reset" method="post">
-       <button class="reset">↻</button>
-    </form>
 
 <%- include("footer") -%>
