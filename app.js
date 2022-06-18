@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const _ = require("lodash");
 const date = require(__dirname + "/date.js");
+require('dotenv').config({ path: __dirname + "/.env" }); 
 
 const app = express();
 
@@ -15,7 +16,10 @@ app.set('views', __dirname + '/views');  //setting 'views' directory for any vie
 app.use(bodyParser.urlencoded({extended:true}));
 app.use("/public", express.static(__dirname + "/public"));
 
-mongoose.connect("mongodb+srv://dontdude:UJ3myodacQna3lXQ@cluster0.8gasx.mongodb.net/todoDB");
+const mongoAtlasUsername = process.env.ATLAS_USERNAME;
+const mongoAtlasPassword = process.env.ATLAS_PASSWORD;
+
+mongoose.connect("mongodb+srv://" + mongoAtlasUsername + ":" + mongoAtlasPassword + "@cluster0.8gasx.mongodb.net/todoDB");
 
 const taskSchema = new mongoose.Schema({
     name : String
